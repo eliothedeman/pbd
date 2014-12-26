@@ -2,6 +2,33 @@ package gopdb
 
 // PDB
 type PDB struct {
+	Atoms              []*Atom
+	Authors            []*Author
+	Compounts          []*Compound
+	Connections        []*Connection
+	Crystals           []*Crystal
+	DatabaseReferences []*DatabaseReference
+	ExperimentalData   []*ExperimentalData
+	Formulas           []*Formula
+	Headers            []*Header
+	Helixes            []*Helix
+	HeteroAtoms        []*HeteroAtom
+	HeteroAtomNames    []*HeteroAtomName
+	JournalEntries     []*Journal
+	Keywords           []*Keywords
+	Links              []*Link
+	Master             []*Master
+	ModifiedResidues   []*ModifiedResidue
+	Origins            []*Orign
+	Remarks            []*Remark
+	ResidueSequences   []*ResidueSequence
+	Revisions          []*Revision
+	Scales             []*Scale
+	Sheets             []*Sheet
+	Sites              []*Site
+	Source             []*Source
+	SSBonds            []*SSBond
+	Title              Title
 }
 
 // TODO add full structures for each of these
@@ -26,7 +53,7 @@ type Orign string
 type Remark string
 type ResidueSequence string
 type Revision string
-type Scale strin
+type Scale string
 type Sheet string
 type Site string
 type Source string
