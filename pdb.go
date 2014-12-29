@@ -1,10 +1,15 @@
-package gopdb
+package pbd
+
+import (
+	"fmt"
+	"sync"
+)
 
 // PDB
 type PDB struct {
 	Atoms              []*Atom
 	Authors            []*Author
-	Compounts          []*Compound
+	Compound           Compound
 	Connections        []*Connection
 	Crystals           []*Crystal
 	DatabaseReferences []*DatabaseReference
@@ -29,12 +34,51 @@ type PDB struct {
 	Source             []*Source
 	SSBonds            []*SSBond
 	Title              Title
+	*sync.Mutex
+}
+
+func NewPDB() *PDB {
+	return &PDB{}
 }
 
 // TODO add full structures for each of these
-type Atom string
+type Atom struct {
+	Serial                int
+	AtomName              string
+	AltLocation           string
+	ResidueName           string
+	ChainIdentifier       string
+	ResidueSequenceNumber int
+	InsertionCode         int
+	X, Y, Z               float64
+	Occupancy             float64
+	TemperatureFactor     float64
+	Segment               string
+	Element               string
+	Charge                string
+}
+
+func (a *Atom) String() string {
+	return fmt.Sprintf("%+v", *a)
+
+}
+
 type Author string
-type Compound string
+
+func (a *Author) String() string {
+	return fmt.Sprint(*a)
+}
+
+type Compound struct {
+	ID    int
+	Name  string
+	Chain []string
+}
+
+func (c *Compound) String() string {
+	return fmt.Sprint(*c)
+}
+
 type Connection string
 type Crystal string
 type DatabaseReference string
