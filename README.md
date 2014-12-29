@@ -1,4 +1,4 @@
-gopdb
+pbd
 =====
 
-A library for working with pdb files in go.
+A library for working with pbd files in go.
