@@ -16,7 +16,7 @@ func TestParse(t *testing.T) {
 		t.Error(err)
 	}
 
-	fmt.Printf("%+v", p.Compound)
+	fmt.Printf("%+v", p.Crystal)
 
 }
 

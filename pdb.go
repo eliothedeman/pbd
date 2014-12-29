@@ -1,9 +1,6 @@
 package pbd
 
-import (
-	"fmt"
-	"sync"
-)
+import "fmt"
 
 // PBD
 type PBD struct {
@@ -11,7 +8,7 @@ type PBD struct {
 	Authors            []*Author
 	Compound           Compound
 	Connections        []*Connection
-	Crystals           []*Crystal
+	Crystal            Crystal
 	DatabaseReferences []*DatabaseReference
 	ExperimentalData   []*ExperimentalData
 	Formulas           []*Formula
@@ -34,7 +31,6 @@ type PBD struct {
 	Source             []*Source
 	SSBonds            []*SSBond
 	Title              Title
-	*sync.Mutex
 }
 
 func NewPBD() *PBD {
@@ -88,7 +84,13 @@ func (c *Connection) String() string {
 	return fmt.Sprint(*c)
 }
 
-type Crystal string
+type Crystal struct {
+	A, B, C           float64
+	Alpha, Beta, Gama float64
+	SGroup            string
+	ZVal              int
+}
+
 type DatabaseReference string
 type ExperimentalData string
 type Formula string
