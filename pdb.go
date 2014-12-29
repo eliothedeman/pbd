@@ -5,8 +5,8 @@ import (
 	"sync"
 )
 
-// PDB
-type PDB struct {
+// PBD
+type PBD struct {
 	Atoms              []*Atom
 	Authors            []*Author
 	Compound           Compound
@@ -37,8 +37,8 @@ type PDB struct {
 	*sync.Mutex
 }
 
-func NewPDB() *PDB {
-	return &PDB{}
+func NewPBD() *PBD {
+	return &PBD{}
 }
 
 // TODO add full structures for each of these
@@ -79,7 +79,15 @@ func (c *Compound) String() string {
 	return fmt.Sprint(*c)
 }
 
-type Connection string
+type Connection struct {
+	BaseAtom       int
+	ConnectedAtoms []int
+}
+
+func (c *Connection) String() string {
+	return fmt.Sprint(*c)
+}
+
 type Crystal string
 type DatabaseReference string
 type ExperimentalData string

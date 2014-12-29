@@ -11,7 +11,7 @@ import (
 )
 
 func TestParse(t *testing.T) {
-	p, err := pbd.ParsePDB(buff)
+	p, err := pbd.ParsePBD(buff)
 	if err != nil {
 		t.Error(err)
 	}
@@ -23,7 +23,7 @@ func TestParse(t *testing.T) {
 func BenchmarkParse(b *testing.B) {
 	b.ReportAllocs()
 	for i := 0; i < b.N; i++ {
-		p, err := pbd.ParsePDB(buff)
+		p, err := pbd.ParsePBD(buff)
 		if err != nil {
 			b.Error(err)
 		}

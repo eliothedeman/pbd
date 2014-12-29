@@ -18,13 +18,13 @@ var (
 		"COMPND": parseCompound,
 	}
 	whiteSpace         = regexp.MustCompile(`\s+`)
-	INSUFFICENT_LENGTH = errors.New("pdb: line is is of incorrect length")
+	INSUFFICENT_LENGTH = errors.New("pbd: line is is of incorrect length")
 )
 
-// ParsePDB read each line of a pdb file and return the PDB object it creates
-func ParsePDB(r io.Reader) (*PDB, error) {
+// ParsePBD read each line of a pbd file and return the PBD object it creates
+func ParsePBD(r io.Reader) (*PBD, error) {
 	scanner := bufio.NewScanner(r)
-	pdb := &PDB{
+	pbd := &PBD{
 		Mutex: &sync.Mutex{},
 	}
 	var err error
@@ -33,7 +33,7 @@ func ParsePDB(r io.Reader) (*PDB, error) {
 		f := selectParser(line)
 
 		if f != nil {
-			err = f(line, pdb)
+			err = f(line, pbd)
 			if err != nil {
 				log.Println(err)
 			}
@@ -41,7 +41,7 @@ func ParsePDB(r io.Reader) (*PDB, error) {
 			// log.Println("could not find parser for ", line)
 		}
 	}
-	return pdb, nil
+	return pbd, nil
 }
 
 func selectParser(line string) lineParser {
@@ -67,9 +67,9 @@ func parseFloat(s string) float64 {
 }
 
 // lineParser parsers a line of text, and assigns it to the correct
-type lineParser func(line string, pdb *PDB) error
+type lineParser func(line string, pbd *PBD) error
 
-func parseAtom(line string, p *PDB) error {
+func parseAtom(line string, p *PBD) error {
 	if len(line) < 80 {
 		return INSUFFICENT_LENGTH
 	}
@@ -95,7 +95,7 @@ func parseAtom(line string, p *PDB) error {
 	return nil
 }
 
-func parseAuthor(line string, p *PDB) error {
+func parseAuthor(line string, p *PBD) error {
 	p.Lock()
 	line = strings.TrimSpace(line[6:])
 	s := strings.Split(line, ",")
@@ -107,7 +107,7 @@ func parseAuthor(line string, p *PDB) error {
 	return nil
 }
 
-func parseCompound(line string, p *PDB) error {
+func parseCompound(line string, p *PBD) error {
 	p.Lock()
 	// strop prefix
 	line = strings.TrimSpace(line[10:])
@@ -127,4 +127,8 @@ func parseCompound(line string, p *PDB) error {
 	p.Unlock()
 
 	return err
+}
+
+func parseConnection(line string, p *PBD) error {
+	return nil
 }
