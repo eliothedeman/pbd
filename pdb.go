@@ -39,19 +39,21 @@ func NewPBD() *PBD {
 
 // TODO add full structures for each of these
 type Atom struct {
-	Serial                int
-	AtomName              string
-	AltLocation           string
-	ResidueName           string
-	ChainIdentifier       string
-	ResidueSequenceNumber int
-	InsertionCode         int
-	X, Y, Z               float64
-	Occupancy             float64
-	TemperatureFactor     float64
-	Segment               string
-	Element               string
-	Charge                string
+	Serial                int     `json:"serial"`
+	AtomName              string  `json:"atom_name"`
+	AltLocation           string  `json:"alternat_location"`
+	ResidueName           string  `json:"residue_name"`
+	ChainIdentifier       string  `json:"chain_identifier"`
+	ResidueSequenceNumber int     `json:"residue_sequence_number"`
+	InsertionCode         int     `json:"insertion_code"`
+	X                     float64 `json:"x"`
+	Y                     float64 `json:"y"`
+	Z                     float64 `json:"z"`
+	Occupancy             float64 `json:"occupancy"`
+	TemperatureFactor     float64 `json:"temperature_factor"`
+	Segment               string  `json:"segment"`
+	Element               string  `json:"element"`
+	Charge                string  `json:"charge"`
 }
 
 func (a *Atom) String() string {
@@ -91,7 +93,21 @@ type Crystal struct {
 	ZVal              int
 }
 
-type DatabaseReference string
+type DatabaseReference struct {
+	ID                          string
+	ChainID                     string
+	SequenceBegin               int
+	InsertBegin                 string
+	SequenceEnd                 int
+	InsertEnd                   string
+	Database                    string
+	DBAccession                 string
+	DBIDCode                    string
+	DBSeqBegin                  int
+	InitialResidueInsertionCode string
+	DBSeqEnd                    int
+	DBInsertionEnd              string
+}
 type ExperimentalData string
 type Formula string
 type Header string

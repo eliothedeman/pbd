@@ -2,6 +2,7 @@ package test
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -16,7 +17,11 @@ func TestParse(t *testing.T) {
 		t.Error(err)
 	}
 
-	fmt.Printf("%+v", p.Crystal)
+	b, jErr := json.Marshal(p.Atoms)
+	if jErr != nil {
+		t.Fatal(err)
+	}
+	fmt.Print(string(b))
 
 }
 

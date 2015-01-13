@@ -145,6 +145,7 @@ func parseConnection(line string, p *PBD) error {
 	return nil
 }
 
+// parseCrystal parse a line into crystal object
 func parseCrystal(line string, p *PBD) error {
 	c := Crystal{}
 	var err error
@@ -159,5 +160,26 @@ func parseCrystal(line string, p *PBD) error {
 	c.ZVal, err = parseInt(line[67:70])
 
 	p.Crystal = c
+	return err
+}
+
+// parseDatabaseReference
+func parseDatabaseReference(line string, p *PBD) error {
+	d := DatabaseReference{}
+	var err error
+	d.ID = line[8:11]
+	d.ChainID = line[12:13]
+	d.SequenceBegin, err = parseInt(line[15:18])
+	d.InsertBegin = line[18:19]
+	d.SequenceEnd, err = parseInt(line[21:24])
+	d.InsertEnd = line[24:25]
+	d.Database = line[27:32]
+	d.DBAccession = line[34:41]
+	d.DBIDCode = line[43:54]
+	d.DBSeqBegin, err = parseInt(line[56:60])
+	d.InitialResidueInsertionCode = line[60:61]
+	d.DBSeqEnd, err = parseInt(line[63:67])
+	d.DBInsertionEnd = line[67:68]
+	p.DatabaseReferences = append(p.DatabaseReferences, &d)
 	return err
 }
